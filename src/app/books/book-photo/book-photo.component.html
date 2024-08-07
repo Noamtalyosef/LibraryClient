@@ -1,0 +1,14 @@
+<div class="image-container" (mouseover)="showMinus = true" (mouseleave)="showMinus = false">
+    <img
+      [src]="basePhotosUrl + book.picturePath"
+      alt="Profile Picture"
+      class="profile-picture"
+    />
+    <button 
+      *ngIf="showMinus && !noPicture" 
+      
+      class="minus-button" 
+      (click)="onPhotoDeleted()">
+      &minus;
+    </button>
+  </div>

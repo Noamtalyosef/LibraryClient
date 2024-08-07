@@ -1,0 +1,50 @@
+
+<ng-template #content let-modal>
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card p-4" style="max-width: 600px; width: 100%;">
+      <div class="card-body text-center">
+        <h5 class="card-title">Edit Book</h5>
+        <hr>
+        <form [formGroup]="editBookForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-control" formControlName="name" required>
+            <div class="invalid-feedback">Please enter a name</div>
+          </div>
+          <div class="mb-3">
+            <label for="authors" class="form-label">Author/s</label>
+            <select #select type="text" class="form-control" formControlName="authors" multiple>
+              <option *ngFor="let author of allAuthors" [value]="author">{{author.firstName}} {{author.lastName}}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="yearOfPublish" class="form-label">Year Of Publish</label>
+            <input type="number" id="yearOfPublish" class="form-control" formControlName="yearOfPublish" required>
+            <div class="invalid-feedback">Please enter a year</div>
+          </div>
+          <div class="mb-3">
+            <label for="publishers" class="form-label">Publisher</label>
+            <select type="text" class="form-control" formControlName="publisher">
+              <option *ngFor="let publish of allPublishers" [value]="publish.id">{{publish.name}}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="copy" class="form-label">Copy </label>
+            <input type="file" id="copy" class="form-control" formControlName="copy" (change)="onFileCopySelected($event)" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="picture" class="form-label">picture </label>
+            <input type="file" id="picture" class="form-control" formControlName="picture" (change)="onFilePictureSelected($event)" required>
+          </div>
+         
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary w-100">Save changes</button>
+            <button type="button" class="btn btn-outline-secondary w-100" (click)="closeModal()">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<button class="btn btn-primary" (click)="open(content)"> <i class="fas fa-edit"></i></button> 

@@ -1,0 +1,70 @@
+<div class="container mt-5">
+    <form [formGroup]="bookForm" (ngSubmit)="submit()">
+      <div class="form-group mb-3">
+        <label for="title" class="form-label">name</label>
+        <input id="title" formControlName="name" class="form-control">
+      </div>
+      <div class="form-group mb-3">
+        <label for="publicationDate" class="form-label">Year of publish</label>
+        <input id="publicationDate" type="number" formControlName="yearOfPublish" class="form-control">
+      </div>
+      <div class="form-group mb-3">
+        <label for="genre" class="form-label">Copy </label>
+        <input id="genre" formControlName="copy" class="form-control"  type="file" (change)="onFileCopySelected($event)">
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="genre" class="form-label">Picture </label>
+        <input id="genre" type="file" formControlName="picture" class="form-control"  (change)="onFilePictureSelected($event)">
+      </div>
+
+      <div class="form-group mb-2">
+        <label for="authors" class="form-label">Authors</label>
+        <select id="authors" formControlName="authors" class="form-control" multiple>
+          <option *ngFor="let author of allAuthors" [value]="author.id">{{author.firstName}}</option>
+        </select>
+      </div>
+
+      <div class="form-group mb-2">
+        <label for="publisher" class="form-label">publisher</label>
+        <select id="publisher" formControlName="publisher" class="form-control">
+          <option *ngFor="let publisher of allPublishers" [value]="publisher.id">{{publisher.name}}</option>
+        </select>
+      </div>
+
+      <div formArrayName="newAuthors" class="form-group mb-3 container2">
+        <label class="form-label"> new Authors</label>
+        <br>
+        <div *ngFor="let newAuthor of newAuthors.controls; let i = index" [formGroupName]="i" class="input-group mb-2">
+            <div class="form-group mb-2" style="margin-right: 4rem;">
+                <label for="firstName-{{i}}" class="form-label">First Name</label>
+                <input id="firstName-{{i}}" formControlName="firstName" class="form-control">
+              </div>
+              <div class="form-group mb-2">
+                <label for="lastName-{{i}}" class="form-label">Last Name</label>
+                <input id="lastName-{{i}}" formControlName="lastName" class="form-control">
+              </div>
+              <div class="form-group mb-2" style="margin-right: 4rem;">
+                <label for="yearOfBirth-{{i}}" class="form-label">Year of Birth</label>
+                <input id="yearOfBirth-{{i}}" type="number" formControlName="yearOfBirth" class="form-control">
+              </div>
+
+              <div class="form-group mb-2">
+                <label for="city" class="form-label">City</label>
+                <select id="city" formControlName="city" class="form-control">
+                  <option *ngFor="let city of allCitys" type="number" [value]="city.id">{{city.name}}</option>
+                </select>
+              </div>
+
+              <button type="button" class="btn btn-outline-danger mt-2" (click)="removeAuthor(i)" >
+                &times; Remove Author
+              </button>
+
+              
+        </div>
+        <button type="button" class="btn btn-outline-primary" (click)="addAuthor()">Add new Author</button>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  

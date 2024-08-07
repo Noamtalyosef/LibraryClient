@@ -1,0 +1,16 @@
+.profile-image-container {
+    width: 100px; /* Set the desired size of the circular image container */
+    height: 100px; /* Set the desired size of the circular image container */
+    margin: 0 auto; /* Center the container */
+    overflow: hidden; /* Ensure the image does not overflow the container */
+    border-radius: 50%; /* Make the container circular */
+    border: 2px solid #ccc; /* Optional: add a border for styling */
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire container */
+    border-radius: 50%; /* Makes the image circular to match the container */
+  }
+  

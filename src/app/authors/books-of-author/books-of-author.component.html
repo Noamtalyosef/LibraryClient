@@ -1,0 +1,28 @@
+<ng-template #content let-modal>
+    
+     <div class="card p-4 d-flex justify-content-center align-items-center" style="max-width: 600px; width: 100%;" >
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="list-group" style="max-height: 400px; overflow-y: auto;">
+                            <div class="list-group-item" *ngFor ="let book of books">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-1">{{ book.name }}</h5>
+                                    <div>
+                                        <edit-book-modal [allAuthors]="allAuthors" [allPublishers]="allPublishers" [book] = "book" style="margin-right: 0.5rem;"></edit-book-modal>
+                                        <button class="btn btn-danger " (click)="deleteBook(book)"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Close</button>
+            </div>
+      </div>
+      
+</ng-template>
+<a class="custom-link"  (click)="open(content)">books</a>

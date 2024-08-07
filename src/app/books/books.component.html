@@ -1,0 +1,71 @@
+
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-3" style="margin-top: 0.5rem;">
+    <div class="d-flex align-items-center">
+      <h2>Books</h2>
+      <input type="text" class="form-control ms-3" placeholder="Search books..." [(ngModel)]="searchTerm" (input)="onSearch()" style="width: 26vw;">
+      <form class="d-flex " style="max-width: 13rem; margin-left: 0.7rem;">
+        <select class="form-select" (change)="onOrderByChange($event)">
+          <option value="year">By Year of Publish</option>
+          <option value="name">By Name</option>
+        </select>
+      </form>
+    </div>
+    <button class="btn btn-primary ms-3" (click)="onCreateBook()">
+      <i class="bi bi-plus"></i> create +
+    </button>
+  </div>
+
+  <div class="container mt-3 table-card">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Picture</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Author</th>
+                    <th scope="col" class="shrinker">Published Year</th>
+                    <th scope="col">Publisher</th>
+                    <th scope="col" class="shrinker">Copy</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of searchBooks">
+                    <td>
+                        <app-book-photo [book]="book"></app-book-photo>
+                    </td>
+                    <td class="align-middle">
+                        {{ book.name }}
+                    </td>
+                    <td class="align-middle">
+                        <span *ngFor="let author of book.authors">{{ author.firstName }} - {{ author.lastName }} <br></span>
+                    </td>
+                    <td class="align-middle">{{ book.yearOfPublish }}</td>
+                    <td class="align-middle shrinker">{{ book.publisher.name }}</td>
+                    <td class="align-middle shrinker">
+                        <a [href]="baseCopysUrl + book.copyPath" download="baseCopysUrl + book.copyPath">
+                            {{book.name}}.txt
+                        </a>
+                    </td>
+                    <td class="align-middle">
+                        <edit-book-modal
+                            [allAuthors]="allAuthors"
+                            [allPublishers]="allPublishers"
+                            [book]="book"
+                            style="margin-right: 1rem;">
+                        </edit-book-modal>
+                        <button class="btn btn-danger ml-2" (click)="onDeleteBook(book)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</div>
+
+
